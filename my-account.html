@@ -13,7 +13,7 @@
     
     <!-- ===== REMIX ICON ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
- <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./fonts/fonts.css">
     <style>
         :root {
             --vireon-cyan: #00f2ff;
@@ -71,7 +71,6 @@
             background-attachment: fixed;
         }
 
-        /* Subtle grid pattern overlay */
         body::after {
             content: '';
             position: fixed;
@@ -214,9 +213,6 @@
             background-color: rgba(0, 242, 255, 0.15);
         }
 
-        /* ============================================================
-           MAIN LAYOUT
-           ============================================================ */
         .main-content { 
             padding: 0 20px 20px; 
             max-width: 1200px; 
@@ -226,9 +222,6 @@
             z-index: 1; 
         }
 
-        /* ============================================================
-           BALANCE SECTION
-           ============================================================ */
         .balance-section { margin-top: 5px; }
         .balance-header-row {
             display: flex; justify-content: space-between; align-items: center; 
@@ -281,9 +274,6 @@
         }
         .btn-activate-header i { font-size: 1.1rem; }
 
-        /* ============================================================
-           CAROUSEL CARDS
-           ============================================================ */
         .balance-cards-wrapper {
             display: flex; 
             gap: 12px; 
@@ -364,9 +354,6 @@
             z-index: 1; 
         }
 
-        /* ============================================================
-           GRAY ACTION CONTAINER
-           ============================================================ */
         .gray-action-container {
             background-color: var(--bg-gray-pill); 
             border-radius: var(--radius-lg);
@@ -409,9 +396,6 @@
         }
         .action-label { font-size: 0.7rem; font-weight: 600; color: var(--text-main); line-height: 1.1; }
 
-        /* ============================================================
-           BENTO GRID ECOSYSTEM HUB - ALL VIREON FEATURES
-           ============================================================ */
         .ecosystem-header {
             display: flex; 
             justify-content: space-between; 
@@ -531,9 +515,6 @@
             width: fit-content;
         }
 
-        /* ============================================================
-           SIDEBAR
-           ============================================================ */
         .mobile-menu-overlay {
             position: fixed; 
             top: 0; 
@@ -652,9 +633,6 @@
         }
         .logout-btn:hover { background: rgba(239, 68, 68, 0.2); }
 
-        /* ============================================================
-           MODALS
-           ============================================================ */
         .modal-overlay {
             position: fixed; 
             top: 0; 
@@ -740,9 +718,6 @@
             transform: translateY(-2px); 
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
         @media (max-width: 480px) {
             .grid-actions { gap: 4px; }
             .action-label { font-size: 0.65rem; }
@@ -776,6 +751,7 @@
 </head>
 <body>
     <div id="ticker-container"></div>   
+    
     <div class="modal-overlay" id="lockedModal">
         <div class="modal-card">
             <button class="close-modal-top" onclick="closeModal('lockedModal')"><i class="ri-close-line"></i></button>
@@ -788,13 +764,34 @@
 
     <div class="modal-overlay" id="withdrawModal">
         <div class="modal-card">
-            <button class="close-modal-top" onclick="closeModal('lockedModal')"><i class="ri-close-line"></i></button>
+            <button class="close-modal-top" onclick="closeModal('withdrawModal')"><i class="ri-close-line"></i></button>
             <div class="modal-icon-circle"><i class="ri-lock-2-line"></i></div>
             <h3 class="modal-title">Account Not Active</h3>
             <p class="modal-desc">You need to activate your account to be able to place withdrawal.</p>
-            <button class="btn-modal-activate" onclick="window.location.href='./payment.html';closeModal('lockedModal')">Activate Now <i class="ri-arrow-right-line" style="margin-left: 5px;"></i></button>
+            <button class="btn-modal-activate" onclick="window.location.href='./payment.html';closeModal('withdrawModal')">Activate Now <i class="ri-arrow-right-line" style="margin-left: 5px;"></i></button>
         </div>
     </div>
+
+    <!-- ===== OFFICIAL CHANNEL JOIN MODAL ===== -->
+    <div class="modal-overlay" id="channelModal">
+        <div class="modal-card">
+            <button class="close-modal-top" onclick="closeChannelModal()"><i class="ri-close-line"></i></button>
+            <div class="modal-icon-circle" style="background: rgba(0, 242, 255, 0.15); color: #00f2ff;">
+                <i class="ri-whatsapp-fill" style="font-size: 2rem;"></i>
+            </div>
+            <h3 class="modal-title">Join Official Channel</h3>
+            <p class="modal-desc">Stay updated with instant withdrawal alerts, community announcements, and exclusive daily bonus codes!</p>
+            
+            <a href="https://whatsapp.com/channel/0029VbDeJsn4dTnC5Jkfdh18" target="_blank" onclick="closeChannelModal()" class="btn-modal-activate" style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+                <i class="ri-send-plane-fill"></i> Join Channel Now
+            </a>
+            
+            <button onclick="closeChannelModal()" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; margin-top: 12px; cursor: pointer;">
+                I'll join later
+            </button>
+        </div>
+    </div>
+
     <div class="mobile-menu-overlay" id="mobileMenu">
         <div class="mobile-menu-content">
             <div class="sidebar-header">
@@ -821,14 +818,14 @@
             </div>
         </div>
     </div>
+
     <header class="top-header">
         <div class="user-greeting">
             <div id="userAvatar" class="avatar-header">U</div>
-<div class="greeting-text">
-    <p>Welcome Back</p>
-    <h2 id="displayUsername">User</h2>
-</div>
-
+            <div class="greeting-text">
+                <p>Welcome Back</p>
+                <h2 id="displayUsername">User</h2>
+            </div>
         </div>
         <div class="header-controls">
             <button class="control-pill" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
@@ -839,6 +836,7 @@
             </button>
         </div>
     </header>
+
     <main class="main-content">
         <section class="balance-section">
             <div class="balance-header-row">
@@ -902,7 +900,7 @@
             </div>
         </div>
 
-        <!-- ===== ECOSYSTEM HUB - ALL VIREON FEATURES FROM FLYERS ===== -->
+        <!-- ===== ECOSYSTEM HUB ===== -->
         <div class="ecosystem-header">
             <div class="ecosystem-title-group">
                 <h3>Earning Hub</h3>
@@ -912,7 +910,6 @@
         </div>
         
         <div class="bento-grid">
-            <!-- 1. Vireon CallCash -->
             <div onclick="openModal('lockedModal')" class="bento-item col-span-2 large">
                 <div class="bento-top">
                     <div class="bento-icon"><i class="ri-phone-line"></i></div>
@@ -925,7 +922,6 @@
                 <div class="bento-badge">₦5k / 15min</div>
             </div>
 
-            <!-- 2. Vireon Surveys -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-file-list-3-line"></i></div></div>
                 <div>
@@ -935,7 +931,6 @@
                 <div class="bento-badge">£5 / survey</div>
             </div>
 
-            <!-- 3. Vireon IQ -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-lightbulb-line"></i></div></div>
                 <div>
@@ -945,7 +940,6 @@
                 <div class="bento-badge">£5 / submission</div>
             </div>
 
-            <!-- 4. Vireon Converse -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-global-line"></i></div></div>
                 <div>
@@ -955,7 +949,6 @@
                 <div class="bento-badge">Pay per task</div>
             </div>
 
-            <!-- 5. Pin-to-Profit -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-pinterest-line"></i></div></div>
                 <div>
@@ -965,7 +958,6 @@
                 <div class="bento-badge">£3 / pin</div>
             </div>
 
-            <!-- 6. Google Monetization -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-google-line"></i></div></div>
                 <div>
@@ -975,7 +967,6 @@
                 <div class="bento-badge">£5 / day</div>
             </div>
 
-            <!-- 7. Vireon Streak Reward -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-fire-line"></i></div></div>
                 <div>
@@ -985,7 +976,6 @@
                 <div class="bento-badge">₦60k / 30 days</div>
             </div>
 
-            <!-- 8. X Revenue Program -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-twitter-x-line"></i></div></div>
                 <div>
@@ -995,7 +985,6 @@
                 <div class="bento-badge">£3 / engagement</div>
             </div>
 
-            <!-- 9. Vireon Orbit Cycle -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-loop-left-line"></i></div></div>
                 <div>
@@ -1005,7 +994,6 @@
                 <div class="bento-badge">1,000 credits</div>
             </div>
 
-            <!-- 10. Partner Reward -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-user-shared-line"></i></div></div>
                 <div>
@@ -1015,7 +1003,6 @@
                 <div class="bento-badge">N14,500 / 7.25</div>
             </div>
 
-            <!-- 11. WhatsApp Audio -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-whatsapp-line"></i></div></div>
                 <div>
@@ -1025,7 +1012,6 @@
                 <div class="bento-badge">Daily</div>
             </div>
 
-            <!-- 12. Phone Call -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-smartphone-line"></i></div></div>
                 <div>
@@ -1035,7 +1021,6 @@
                 <div class="bento-badge">Daily</div>
             </div>
 
-            <!-- 13. Play Game -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-gamepad-line"></i></div></div>
                 <div>
@@ -1045,7 +1030,6 @@
                 <div class="bento-badge">Daily</div>
             </div>
 
-            <!-- 14. Remote Jobs -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-briefcase-line"></i></div></div>
                 <div>
@@ -1055,7 +1039,6 @@
                 <div class="bento-badge">Start</div>
             </div>
 
-            <!-- 15. Play Music -->
             <div onclick="openModal('lockedModal')" class="bento-item">
                 <div class="bento-top"><div class="bento-icon"><i class="ri-music-2-line"></i></div></div>
                 <div>
@@ -1064,38 +1047,20 @@
                 </div>
                 <div class="bento-badge">Daily</div>
             </div>
-            <!-- 16. Loans -->
-   <div onclick="openModal('lockedModal')" class="bento-item">
-    <div class="bento-top">
-        <div class="bento-icon"><i class="ri-bank-card-line"></i></div>
-    </div>
-    <div>
-        <div class="bento-title">Loans</div>
-        <div class="bento-desc">Access quick loans with flexible repayment options instantly.</div>
-    </div>
-    <div class="bento-badge">Featured</div>
-</div>
+
+            <div onclick="openModal('lockedModal')" class="bento-item">
+                <div class="bento-top">
+                    <div class="bento-icon"><i class="ri-bank-card-line"></i></div>
+                </div>
+                <div>
+                    <div class="bento-title">Loans</div>
+                    <div class="bento-desc">Access quick loans with flexible repayment options instantly.</div>
+                </div>
+                <div class="bento-badge">Featured</div>
+            </div>
         </div>
     </main>
-        <!-- ===== OFFICIAL CHANNEL JOIN MODAL ===== -->
-<div class="modal-overlay" id="channelModal">
-    <div class="modal-card">
-        <button class="close-modal-top" onclick="closeChannelModal()"><i class="ri-close-line"></i></button>
-        <div class="modal-icon-circle" style="background: rgba(0, 242, 255, 0.15); color: #00f2ff;">
-            <i class="ri-telegram-fill" style="font-size: 2rem;"></i>
-        </div>
-        <h3 class="modal-title">Join Official Channel</h3>
-        <p class="modal-desc">Stay updated with instant withdrawal alerts, community announcements, and exclusive daily bonus codes!</p>
-        
-        <a href="https://whatsapp.com/channel/0029VbDeJsn4dTnC5Jkfdh18" target="_blank" onclick="closeChannelModal()" class="btn-modal-activate" style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
-            <i class="ri-send-plane-fill"></i> Join Channel Now
-        </a>
-        
-        <button onclick="closeChannelModal()" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; margin-top: 12px; cursor: pointer;">
-            I'll join later
-        </button>
-    </div>
-</div>
+
     <script>
         const firstNames = [
             "Nicholas","Chidinma","Oluwaseun","Adaeze","Emeka","Folake","Ibrahim","Blessing",
@@ -1290,9 +1255,6 @@
             }, 4000);
         });
 
-        // ============================================================
-        // MODAL LOGIC
-        // ============================================================
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.classList.add('active');
@@ -1313,31 +1275,7 @@
                 }
             });
         });
-        function updateWithdrawAmount() {
-            const select = document.getElementById('withdrawSource');
-            const amountDisplay = document.getElementById('withdrawAmountDisplay');
-            const labelDisplay = document.getElementById('withdrawSourceLabel');
-            
-            const selectedValue = select.value;
 
-            if (selectedValue === 'calls') {
-                amountDisplay.innerText = '₦12,000';
-                labelDisplay.innerText = 'Withdrawing from: Vireon Calls';
-            } else if (selectedValue === 'games') {
-                amountDisplay.innerText = '₦5,000';
-                labelDisplay.innerText = 'Withdrawing from: Game Rewards';
-            } else {
-                amountDisplay.innerText = '₦17,000';
-                labelDisplay.innerText = 'Withdrawing from: Total Balance';
-            }
-        }
-
-        function handleWithdrawSubmit() {
-            closeModal('withdrawModal');
-            setTimeout(() => {
-                openModal('lockedModal');
-            }, 300);
-        }
         function openMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.add('active');
@@ -1351,6 +1289,7 @@
         document.getElementById('mobileMenu').addEventListener('click', function(e) {
             if (e.target === this) { closeMobileMenu(); }
         });
+
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('themeIcon');
@@ -1362,6 +1301,7 @@
                 icon.className = 'ri-moon-line';
             }
         }
+
         let isBalanceHidden = false;
         function toggleBalance() {
             const display = document.getElementById('balanceDisplay');
@@ -1376,7 +1316,6 @@
             isBalanceHidden = !isBalanceHidden;
         }
 
-        // Spinner animation CSS
         const style = document.createElement('style');
         style.textContent = `
             .spinner {
@@ -1391,53 +1330,36 @@
         console.log('🚀 Vireon – Dashboard Loaded');
 
         document.addEventListener('DOMContentLoaded', function() {
-    // 1. Retrieve the stored username from localStorage
-    const storedUsername = localStorage.getItem('vireon_username');
+            const storedUsername = localStorage.getItem('vireon_username');
+            const usernameDisplay = document.getElementById('displayUsername');
+            const avatarDisplay = document.getElementById('userAvatar');
 
-    const usernameDisplay = document.getElementById('displayUsername');
-    const avatarDisplay = document.getElementById('userAvatar');
+            if (storedUsername && storedUsername.trim() !== '') {
+                const cleanUsername = storedUsername.trim();
+                if (usernameDisplay) usernameDisplay.textContent = cleanUsername;
+                const initials = cleanUsername.substring(0, 2).toUpperCase();
+                if (avatarDisplay) avatarDisplay.textContent = initials;
+            } else {
+                if (usernameDisplay) usernameDisplay.textContent = 'Guest';
+                if (avatarDisplay) avatarDisplay.textContent = 'GU';
+            }
+        });
 
-    if (storedUsername && storedUsername.trim() !== '') {
-        const cleanUsername = storedUsername.trim();
-
-        // 2. Set the displayed username
-        if (usernameDisplay) {
-            usernameDisplay.textContent = cleanUsername;
+        // Official Channel Modal Logic
+        function closeChannelModal() {
+            closeModal('channelModal');
         }
 
-        // 3. Extract the first 2 letters for the avatar initials
-        const initials = cleanUsername.substring(0, 2).toUpperCase();
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasSeenChannelPopup = sessionStorage.getItem('vireon_channel_popup_seen');
 
-        // 4. Update the avatar placeholder
-        if (avatarDisplay) {
-            avatarDisplay.textContent = initials;
-        }
-    } else {
-        // Fallback for guests or unauthenticated visitors
-        if (usernameDisplay) usernameDisplay.textContent = 'Guest';
-        if (avatarDisplay) avatarDisplay.textContent = 'GU';
-    }
-});
-// ============================================================
-// OFFICIAL CHANNEL MODAL LOGIC
-// ============================================================
-function closeChannelModal() {
-    closeModal('channelModal');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if user has already seen the popup during this session
-    const hasSeenChannelPopup = sessionStorage.getItem('vireon_channel_popup_seen');
-
-    if (!hasSeenChannelPopup) {
-        setTimeout(() => {
-            openModal('channelModal');
-            sessionStorage.setItem('vireon_channel_popup_seen', 'true');
-        }, 2000); // Trigger 2 seconds after page load
-    }
-});
-
+            if (!hasSeenChannelPopup) {
+                setTimeout(() => {
+                    openModal('channelModal');
+                    sessionStorage.setItem('vireon_channel_popup_seen', 'true');
+                }, 2000);
+            }
+        });
     </script>
-
 </body>
 </html>
