@@ -1399,8 +1399,45 @@
         if (avatarDisplay) avatarDisplay.textContent = 'GU';
     }
 });
+// ============================================================
+// OFFICIAL CHANNEL MODAL LOGIC
+// ============================================================
+function closeChannelModal() {
+    closeModal('channelModal');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user has already seen the popup during this session
+    const hasSeenChannelPopup = sessionStorage.getItem('vireon_channel_popup_seen');
+
+    if (!hasSeenChannelPopup) {
+        setTimeout(() => {
+            openModal('channelModal');
+            sessionStorage.setItem('vireon_channel_popup_seen', 'true');
+        }, 2000); // Trigger 2 seconds after page load
+    }
+});
 
     </script>
 
 </body>
+    <!-- ===== OFFICIAL CHANNEL JOIN MODAL ===== -->
+<div class="modal-overlay" id="channelModal">
+    <div class="modal-card">
+        <button class="close-modal-top" onclick="closeChannelModal()"><i class="ri-close-line"></i></button>
+        <div class="modal-icon-circle" style="background: rgba(0, 242, 255, 0.15); color: #00f2ff;">
+            <i class="ri-telegram-fill" style="font-size: 2rem;"></i>
+        </div>
+        <h3 class="modal-title">Join Official Channel</h3>
+        <p class="modal-desc">Stay updated with instant withdrawal alerts, community announcements, and exclusive daily bonus codes!</p>
+        
+        <a href="https://whatsapp.com/channel/0029VbDeJsn4dTnC5Jkfdh18" target="_blank" onclick="closeChannelModal()" class="btn-modal-activate" style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;">
+            <i class="ri-send-plane-fill"></i> Join Channel Now
+        </a>
+        
+        <button onclick="closeChannelModal()" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; margin-top: 12px; cursor: pointer;">
+            I'll join later
+        </button>
+    </div>
+</div>
 </html>
